@@ -47,6 +47,7 @@
   background-color: #eee;
   box-shadow: 5px 5px 10px rgba(0,0,0, .6);
   border-radius: 20px;
+  overflow: scroll;
 
   &--1 {
     grid-area: panel1;

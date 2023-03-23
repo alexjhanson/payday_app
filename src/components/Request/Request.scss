@@ -1,0 +1,12 @@
+
+.request {
+    display: flex;
+    
+    > * {
+        margin: 1rem;
+    }
+
+    &__type {
+        margin-left: 2rem;
+    }
+}
