@@ -1,8 +1,4 @@
+
 .App {
-  display: grid;
-  background-color: #eee;
-  margin: 0 auto;
-  width: max(1200px, 80%);
+    width: min(80vw, 1200px);
 }
-
-
