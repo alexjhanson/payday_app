@@ -8,7 +8,7 @@ const DigitalClock = (props) => {
 
     return ( 
         <div className="digital-clock">
-            <p className="digital-clock__time">{dt_util.formatClockTime(time)}</p>
+            <p className="digital-clock__time">{dt_util.formatTime(time)}</p>
             <p className="digital-clock__date">{dt_util.getClockDate()}</p>
         </div>
      );

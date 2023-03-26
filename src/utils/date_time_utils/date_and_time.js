@@ -1,13 +1,13 @@
 
 const DayOfWeekShort = ['SUN','MON', 'TUE', 'WED', 'THUR', 'FRI', 'SAT'];
-const DayOfWeekLong = ['SUN','MON', 'TUE', 'WED', 'THUR', 'FRI', 'SAT'];
+// const DayOfWeekLong = ['SUN','MON', 'TUE', 'WED', 'THUR', 'FRI', 'SAT'];
 
 const MonthShort = ['JAN','FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-const MonthLong = ['JANUARY','FEBRUARY', 'MARCH', 'ARPIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
+// const MonthLong = ['JANUARY','FEBRUARY', 'MARCH', 'ARPIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
 
 function getCurrentTime() {
 
-    let currentTime = new Date(Date.now());
+    let currentTime = new Date();
 
     return {
         seconds: currentTime.getSeconds(),
@@ -17,7 +17,7 @@ function getCurrentTime() {
 
 }
 
-function formatClockTime(time) {
+function formatTime(time) {
 
     let hours = time.hours;
     let am_pm = "AM";
@@ -38,10 +38,18 @@ function getClockDate() {
     return `${DayOfWeekShort[today.getDay()]} ${MonthShort[today.getMonth()]} ${today.getDate().toString().padStart(2, '0')}`;
 }
 
-export { getCurrentTime, formatClockTime, getClockDate};
+function areDatesEqual(date1, date2) {
 
-export default {
-    getCurrentTime,
-    formatClockTime,
-    getClockDate,
+    return date1.getFullYear() === date2.getFullYear() && date1.getMonth() === date2.getMonth() && date1.getDate() === date2.getDate();
 }
+
+export { getCurrentTime, formatTime, getClockDate, areDatesEqual};
+
+const DateTimeUtls = {
+    getCurrentTime,
+    formatTime,
+    getClockDate,
+    areDatesEqual,
+}
+
+export default DateTimeUtls;
