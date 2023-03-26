@@ -1,0 +1,35 @@
+
+.digital-clock {
+
+    // Digital clock design from: 
+    // Toshiyuki TAKAHASHI
+    // https://codepen.io/gau/pen/LjQwGp
+
+    width: 40%;
+    margin: 30px auto;
+    padding: 1rem;
+    border: 5px solid 	#696969;
+    border-radius: 10px;
+
+    box-shadow: 0 5px 8px rgba(0,0,0,.8);
+   
+    font-family: 'Share Tech Mono', monospace;
+    text-align: center;
+    color: #daf6ff;
+    text-shadow: 0 0 20px rgba(10, 175, 230, 1),  0 0 20px rgba(10, 175, 230, 0);
+
+    background: #0f3854;
+    background: radial-gradient(ellipse at center,  #0a2e38  0%, #000000 70%);
+    background-size: 100%;
+
+    &__time {
+        font-size: 3rem;
+        letter-spacing: 0.05em;
+    }
+
+    &__date {
+        padding: .5rem;
+        font-size: 1.5rem;
+        letter-spacing: 0.05em;
+    }
+}

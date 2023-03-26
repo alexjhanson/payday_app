@@ -1,7 +1,20 @@
 
+@import "../../Theme.scss";
+
 .week {
 
     width: 80%;
     margin: 2rem auto;
+
+    &__header {
+        background-color: $tertiary-color;
+        border-radius: 5px;
+        padding: .5rem;
+        padding-left: 1rem;
+    }
+
+    &__shift-container {
+        padding-left: 2rem;
+    }
 
 }

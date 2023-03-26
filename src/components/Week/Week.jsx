@@ -6,8 +6,10 @@ const Week = (props) => {
 
     return (
         <div className="week">
-            <h1>Week #{props.weekNumber}</h1>
-            { new Array(4).fill().map( (e, indx) => <Shift key={`shift-${indx}`}/> ) }
+            <h1 className="week__header">Week #{props.weekNumber}</h1>
+            <div className="week__shift-container">
+                { new Array(4).fill().map( (e, indx) => <Shift key={`shift-${indx}`}/> ) }
+            </div>
         </div>
     );
 }

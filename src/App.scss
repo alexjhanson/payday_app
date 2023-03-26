@@ -1,3 +1,5 @@
+ @import "./Theme.scss";
+ 
  *,
  *::before,
  *::after {
@@ -11,6 +13,7 @@
  }
 
  body {
+  background-color: $primary-color;
   box-sizing: border-box;
   height: 100vh;
   width: 100vw;
@@ -43,11 +46,12 @@
 }
 
 .panel {
-
-  background-color: #eee;
+  background-color: white;
   box-shadow: 5px 5px 10px rgba(0,0,0, .6);
   border-radius: 20px;
   overflow: scroll;
+
+  font-family: 'Roboto Mono', monospace;
 
   &--1 {
     grid-area: panel1;
@@ -61,6 +65,8 @@
     grid-area: panel3;
   }
 }
+
+
 
 
 
