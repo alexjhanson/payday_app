@@ -17,6 +17,7 @@ function formatTime(time) {
 
     if(hours > 12) {
         hours %= 12;
+        hours = hours === 0 ? 12 : hours;
         am_pm = "PM";
     } 
 
