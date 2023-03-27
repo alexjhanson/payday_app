@@ -6,6 +6,8 @@ const punch_types = {
     END: 'end',
     IN: 'in',
     OUT: 'out',
+    LUNCH: 'lunch',
+    LUNCH_END: 'lunch end',
     *[Symbol.iterator]() {
         for(let key of Object.keys(this))
             yield this[key];

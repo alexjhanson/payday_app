@@ -10,7 +10,8 @@ require('dotenv').config();
 require('./config/database');
 
 // load routers
-const employeeRouter = require("./routes/employee");
+const employeesRouter = require("./routes/employees");
+const punchesRouter = require("./routes/punches");
 
 // create server
 const app = express();
@@ -23,7 +24,8 @@ app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 
 // data routes
-app.use('/employee', employeeRouter);
+app.use('/employees', employeesRouter);
+app.use('/', punchesRouter);
 
 
 // catch all route, REACT client-side routing

@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
-import {getCurrentTime} from '../date_time_utils/date_and_time';
 
 export default function useClockUpdate() {
 
-    const [time, setTime] = useState(getCurrentTime());
+    const [time, setTime] = useState(new Date());
 
     useEffect(() => {
 
         const id = setInterval(() => {
-            setTime(getCurrentTime())
+            setTime(new Date())
         },
         1000);
 

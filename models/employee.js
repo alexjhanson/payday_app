@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const settings = require('../config/settings');
 const Schema = mongoose.Schema;
 
+require('./request');
+
 const punchSchema = new Schema({
     type: {
         type: String,
@@ -16,18 +18,13 @@ const punchSchema = new Schema({
 },
 {timestamps: true});
 
-const shiftSchema = new Schema({
-    punches: [punchSchema]
-},
-{timestamps: true});
-
 const imageSchema = new Schema({
     title: {
         type: String,
         default: "profile picture"
     },
-    image: {
-      data: Buffer,
+    data: {
+      type: Buffer,
       contentType: String
     }
   },
@@ -47,8 +44,8 @@ const employeeSchema = new Schema({
         type: String,
         required: true,
     },
-    shifts: [shiftSchema],
-    requests: [{type: Schema.Types.ObjectId, ref: 'Timeoffrequest'}]
+    punches: [punchSchema],
+    requests: [{type: Schema.Types.ObjectId, ref: 'Timeoffrequest'}],
 },
 {timestamps: true});
 

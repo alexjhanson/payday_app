@@ -1,30 +1,20 @@
 
 import DigitalClock from '../../components/DigitalClock/DigitalClock';
-import dt_util from '../../utils/date_time_utils/date_and_time';
+import Loading from '../../components/Loading/Loading';
+import {PunchButtonContainer as PunchButtons} from '../PunchButtonContainer/PunchButtonContainer';
 import './ClockPanel.scss';
-
 
 export default function ClockPanel(props) {
 
     return (  
         <div className={`panel clock-panel ${props.panelLocation}`}>
-            <DigitalClock />
+            <DigitalClock/>
             {
-                props.lastPunch ?
-                    <p className="clock-panel__last-punch">
-                        `${props.lastPunch.type} : ${dt_util.formatTime(props.lastPunch.time)}` 
-                    </p>
-                    : 
-                    null
+                props.employeeUpdating ?
+                <Loading color="rgb(232,85,61)"/>
+                :
+                <PunchButtons lastPunch={props.lastPunch} handlePunch={props.handlePunch} errMsg={props.errMsg} />
             }
-            <button className={"clock-panel__punch-button"} onClick={props.handlePunch}>
-                    {
-                        props.lastPunch ? 
-                        props.lastPunch.type.toLowerCase() === 'start' || 
-                        props.lastPunch.type.toLowerCase() === 'in' ? 'OUT' : 'IN'
-                        : 'IN' 
-                    }
-            </button>
         </div>
     );
 }

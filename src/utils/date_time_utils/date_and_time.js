@@ -5,21 +5,14 @@ const DayOfWeekShort = ['SUN','MON', 'TUE', 'WED', 'THUR', 'FRI', 'SAT'];
 const MonthShort = ['JAN','FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 // const MonthLong = ['JANUARY','FEBRUARY', 'MARCH', 'ARPIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
 
-function getCurrentTime() {
-
-    let currentTime = new Date();
-
-    return {
-        seconds: currentTime.getSeconds(),
-        minutes: currentTime.getMinutes(),
-        hours: currentTime.getHours()
-    };
-
-}
-
+/**
+ * 
+ * @param {date} time- Date object 
+ * @returns {string} - string representing time in format hh:min:ss
+ */
 function formatTime(time) {
 
-    let hours = time.hours;
+    let hours = time.getHours();
     let am_pm = "AM";
 
     if(hours > 12) {
@@ -28,7 +21,7 @@ function formatTime(time) {
     } 
 
 
-    return `${hours.toString().padStart(2, '0')}:${time.minutes.toString().padStart(2, '0')}:${time.seconds.toString().padStart(2, '0')} ${am_pm}`;
+    return `${hours.toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}:${time.getSeconds().toString().padStart(2, '0')} ${am_pm}`;
 }
 
 function getClockDate() {
@@ -43,13 +36,12 @@ function areDatesEqual(date1, date2) {
     return date1.getFullYear() === date2.getFullYear() && date1.getMonth() === date2.getMonth() && date1.getDate() === date2.getDate();
 }
 
-export { getCurrentTime, formatTime, getClockDate, areDatesEqual};
+export { formatTime, getClockDate, areDatesEqual};
 
-const DateTimeUtls = {
-    getCurrentTime,
+const date_and_time_utils = {
     formatTime,
     getClockDate,
     areDatesEqual,
 }
 
-export default DateTimeUtls;
+export default date_and_time_utils;
