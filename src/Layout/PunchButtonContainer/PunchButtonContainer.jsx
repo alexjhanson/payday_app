@@ -1,25 +1,12 @@
-import date_and_time_utils from '../../utils/date_time_utils/date_and_time';
 import './PunchButtonContainer.scss';
+import { default as dt_utils } from '../../utils/date_and_time';
+import { default as p_utils } from '../../utils/punch_utils';
 
-const PunchButtonContainer = (props) => {
+import PunchButton from '../../components/PunchButton/PunchButton';
 
-    let punchType = 'in';
-    let lunchType = null;
+export default function PunchButtonContainer (props) {
 
-    if(props.lastPunch) {
-        let lastType = props.lastPunch.type;
-
-        if('start in'.includes(lastType)) {
-            punchType = 'out';
-            lunchType = 'lunch';
-        }else if(lastType === 'lunch end') {
-            punchType = 'out'
-        } else if(lastType === 'lunch') {
-            punchType = null;
-            lunchType = 'lunch end';
-        }
-
-    }
+    const[punchType, lunchType] = p_utils.getPunchTypes(props.lastPunch);
 
     return ( 
         <div className="punch-container">
@@ -28,41 +15,28 @@ const PunchButtonContainer = (props) => {
                     <div className="punch-container__last-punch">
                         <h1>Last Punch</h1>
                         <p>
-                            {`${props.lastPunch.type.toUpperCase()} : ${date_and_time_utils.formatTime(props.lastPunch.time)}`} 
+                            {`${props.lastPunch.type.toUpperCase()}: ${dt_utils.formatTimeToMinutes(new Date(props.lastPunch.time))} ${dt_utils.getAmPm(new Date(props.lastPunch.time))}`} 
                         </p>
-                        <p>{props.errorMsg}</p>
                     </div>
                     : 
                     null
             }
             <div className="punch-container__button-container">
-                {
-                    punchType ? 
-                        <button className={"punch-container__button"} 
-                            onClick={ () => props.handlePunch({type: punchType, time: new Date()})}
-                            style={{backgroundColor: punchType === 'out' ? 'rgb(232,20,30)': 'rgb(35,102,96)'}}
-                        >
-                                {punchType.toUpperCase()}
-                        </button>
-                        :
-                        null
-                }
-                {
-                    lunchType ?
-                        <button 
-                            className={"punch-container__button"} 
-                            onClick={ () => props.handlePunch({type: lunchType, time: new Date()})}
-                            style={{backgroundColor: lunchType === 'lunch' ? 'rgb(35,102,96)': 'rgb(232,20,30)'}}
-                        >
-                            {lunchType.toUpperCase()}
-                        </button>
-                        :
-                        null
-                }
+                { punchType ? 
+                        <PunchButton punchType={punchType} 
+                                     bgColor={p_utils.getPunchButtonColor(punchType)} 
+                                     handleCurrentShiftUpdate = {props.handleCurrentShiftUpdate}
+                        /> 
+                        : null}
+                { lunchType ? 
+                        <PunchButton punchType={lunchType} 
+                                     bgColor={p_utils.getPunchButtonColor(lunchType)} 
+                                     handleCurrentShiftUpdate = {props.handleCurrentShiftUpdate}
+                        /> 
+                        : null }
             </div>
         </div>
      );
 }
 
-// Non default to allow renaming.
-export { PunchButtonContainer };
+

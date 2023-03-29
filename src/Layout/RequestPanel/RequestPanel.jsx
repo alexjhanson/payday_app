@@ -2,7 +2,6 @@ import './RequestPanel.scss';
 
 import Request from "../../components/Request/Request";
 
-
 const RequestPanel = (props) => {
     return ( 
         <div className={`panel request-panel ${props.panelLocation}`}>

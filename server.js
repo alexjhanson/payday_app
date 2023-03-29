@@ -10,12 +10,13 @@ require('dotenv').config();
 require('./config/database');
 
 // load routers
-const employeesRouter = require("./routes/employees");
-const punchesRouter = require("./routes/punches");
+const apiRouter = require('./routes/api/api');
+const employeesRouter = require('./routes/employees');
+const shiftsRouter = require('./routes/shifts');
+const punchesRouter = require('./routes/punches');
 
 // create server
 const app = express();
-
 
 // mount middleware and configure static assets
 app.use(logger('dev'));
@@ -23,16 +24,16 @@ app.use(express.json());
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 
-// data routes
+// routes
+app.use('/api', apiRouter);
 app.use('/employees', employeesRouter);
+app.use('/shifts', shiftsRouter);
 app.use('/', punchesRouter);
-
 
 // catch all route, REACT client-side routing
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
-
 
 const port = process.env.port || 3001;
 

@@ -1,0 +1,20 @@
+.punch-button {
+
+    font-weight: bold;
+    color: white;
+    margin: 1rem;
+    letter-spacing: 2px;
+    font-size: 2rem;
+    padding: 2rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 2px 5px 5px rgba(0,0,0,.8);
+    transition: all .3s;
+
+    &:active {
+        box-shadow: none;
+        transform: translateY(-2px);
+    }
+    
+}

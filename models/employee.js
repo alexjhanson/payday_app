@@ -1,22 +1,5 @@
 const mongoose = require('mongoose');
-const settings = require('../config/settings');
 const Schema = mongoose.Schema;
-
-require('./request');
-
-const punchSchema = new Schema({
-    type: {
-        type: String,
-        enum: [...settings.punch_types],
-        required: true,
-    },
-    time: {
-        type: String,
-        match: settings.date_and_time_format,
-        required: true,
-    },
-},
-{timestamps: true});
 
 const imageSchema = new Schema({
     title: {
@@ -25,10 +8,11 @@ const imageSchema = new Schema({
     },
     data: {
       type: Buffer,
-      contentType: String
+      contentType: String,
+      required: true
     }
-  },
-  {timestamps: true});
+},
+{timestamps: true});
 
 const employeeSchema = new Schema({
     empId: {
@@ -44,8 +28,6 @@ const employeeSchema = new Schema({
         type: String,
         required: true,
     },
-    punches: [punchSchema],
-    requests: [{type: Schema.Types.ObjectId, ref: 'Timeoffrequest'}],
 },
 {timestamps: true});
 

@@ -2,37 +2,43 @@ const mongoose = require('mongoose');
 const settings = require('../config/settings');
 const Schema = mongoose.Schema;
 
-const requestSchema = new Schema({
+const punchSchema = new Schema({
     type: {
         type: String,
-        enum: ['PTO', 'SICK', 'PAT', 'MAT', 'VOTE', 'COMP', 'MIL', 'JURY', 'PRSN', 'VAC'],
+        enum: [...settings.punch_types],
         required: true,
     },
-    startDate: {
+    time: {
         type: String,
         match: settings.date_and_time_format,
         required: true,
     },
-    endDate: {
+    approved: {
+        type: Boolean,
+        default: false,
+    }
+});
+
+const shiftSchema = new Schema({
+    date: {
         type: String,
         match: settings.date_and_time_format,
-        required: true,
+        required: true
     },
-    notes: {
-        type: String,
-        maxlength: 100,
+    open: {
+        type: Boolean,
+        required: true
     },
-    status: {
-        type: String,
-        enum: ['APRV', 'DEN', 'PEN'],
-        required: true,
-    },
+    punches: [punchSchema],
     employee: {
         type: Schema.Types.ObjectId,
         ref: 'Employee',
         required: true
-    }
     },
-{timestamps: true});
+    approved: {
+        type: Boolean,
+        default: false,
+    }
+});
 
-module.exports = mongoose.model('Request', requestSchema);
+module.exports = mongoose.model('Shift', shiftSchema);

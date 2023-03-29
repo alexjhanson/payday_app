@@ -1,0 +1,15 @@
+.shift-detail {
+
+    position: absolute;
+    padding: 2rem;
+    top: 2rem;
+    left: 2rem;
+    z-index: 2;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 5px rgba(0,0,0, .8);
+
+    &__row {
+        display: flex;
+    }
+}

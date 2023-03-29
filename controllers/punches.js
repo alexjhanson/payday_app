@@ -1,4 +1,4 @@
-const Employee = require('../models/employee');
+const Shift = require('../models/shift');
 
 module.exports = {
     create,
@@ -6,17 +6,14 @@ module.exports = {
 
 function create(req, res) {
 
-    console.log("in punches controller");
-
-    Employee.findById(req.params.id)
-    .then(emp => {
-        emp.punches.push(req.body.punch);
-        return emp.save();
+    Shift.findById(req.params.id)
+    .then(shift => {
+        shift.punches.push(req.body);
+        return shift.save();
     })
-    .then(emp => res.status(200).json(emp))
+    .then(shift => res.status(200).json(shift))
     .catch(err => {
-        console.log('could not save punch\n', err);
         res.status(400).json(err);
     });
 
-};
+}

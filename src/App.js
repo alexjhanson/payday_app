@@ -9,8 +9,9 @@ import RequestPanel from './layout/RequestPanel/RequestPanel';
 import Loading from './components/Loading/Loading'
 
 // state (Hooks) & helper functions
-import gettEmployee from './utils/getEmployee';
-import punchInOut from  './utils/punchInOut';
+import init from './utils/init';
+import { punchInOut } from './utils/punch_utils';
+import { syncShifts } from './utils/shift_utils';
 import { useState, useEffect } from 'react';
 
 function App() {
@@ -18,78 +19,59 @@ function App() {
   // Configure state
   const [appState, setAppState] = useState({
     employee: null,
-    errMsg: "",
-    employeeUpdating: true
+    currentShift: null,
+    currentShiftUpdating: false,
+    shifts: null,
+    shiftsUpdating: false,
+    punchError: false,
+    requests: null,
+    requestsUpdating: false
   });
   
-  // Retrieve employee first time app is loaded.
-  // icebox feature- add login page, handle user/employee acquisition there
+  // initialize state
   useEffect(()=> {
-     (async function() {
-        let tmp = {...appState};
-        try {
-          tmp.employee =  await gettEmployee();
-          tmp.employeeUpdating = false;
-          console.log("employee retrieved",tmp.employee);
-        } catch(e) {
-          console.log("could not load employee");
-        }
-        setAppState(tmp)
-    })();
-  }, [])
-  
-  // props for child components
-  let punches = [];
-  let requests = [];
-  let lastPunch = null;
+    init({...appState}, setAppState)
+  }, []);
 
-  if(appState.employee) {
+  async function makePunch(shiftId, punch) {
+    let tmp = {...appState};
+    const shift = await punchInOut(shiftId, punch)
 
-    console.log("from component employee:" , appState.employee);
-
-    punches = appState.employee.punches;
-
-    requests = appState.employee.requests;
-
-    if(punches.length) {
-      lastPunch = punches[punches.length - 1];
-      // convert stored ISO format to date object
-      lastPunch.time = new Date(lastPunch.time);
+    if(shift) {
+      tmp.currentShift = shift;
+      syncShifts(tmp.shifts, shift);
+    } else {
+      tmp.punchError = true;
     }
-  } else {
-    console.log("no employee yet");
-  }
 
-  async function updatePunch(punch) {
-    let tmp = { ...appState }
-    try {
-      tmp.employee = await punchInOut(punch, appState.employee);
-    } catch(e) {
-      tmp.errMsg = "could not update punch"
-    }
-    tmp.employeeUpdating = false;
+    tmp.currentShiftUpdating = false;
+
     setAppState(tmp);
   }
 
-  function handlePunch(punch){
-    let tmp = { ...appState };
-    tmp.employeeUpdating = true;
+  function handleCurrentShiftUpdate(punch) {
+    let tmp = {...appState};
+    tmp.currentShiftUpdating = true;
+    makePunch(appState.currentShift._id, punch);
+
     setAppState(tmp);
-    updatePunch(punch);
   }
 
   if(appState.employee) {
     return (
-        <div className="App">
-          <ShiftPanel panelLocation="panel--1" shifts={punches}/>
-          <ClockPanel 
-              panelLocation="panel--2" 
-              errorMsg={appState.errMsg}
-              employeeUpdating={appState.employeeUpdating}
-              handlePunch={handlePunch} 
-              lastPunch={lastPunch}/>
-          <RequestPanel panelLocation="panel--3" requests={requests}/>
-        </div>
+        <>
+          <div className="App">
+            {/* <ShiftPanel panelLocation="panel--1"/> */}
+            <ClockPanel 
+                panelLocation="panel--2" 
+                currentShiftUpdating={appState.currentShiftUpdating}
+                handleCurrentShiftUpdate={handleCurrentShiftUpdate} 
+                currentShift={appState.currentShift}
+                punchError={appState.punchError}
+            />
+            <RequestPanel panelLocation="panel--3" requests={appState.requests}/>
+          </div>
+      </>
     );
   } else {
     return <Loading color='#fff'/>

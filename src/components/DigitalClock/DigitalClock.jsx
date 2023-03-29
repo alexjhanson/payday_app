@@ -1,5 +1,5 @@
 import './DigitalClock.scss';
-import date_and_time_utils from '../../utils/date_time_utils/date_and_time';
+import {default as dt_utils} from '../../utils/date_and_time';
 import useClockUpdate from '../../utils/hooks/useClockUpdate';
 
 const DigitalClock = (props) => {
@@ -9,8 +9,8 @@ const DigitalClock = (props) => {
 
     return ( 
         <div className="digital-clock">
-            <p className="digital-clock__time">{date_and_time_utils.formatTime(time)}</p>
-            <p className="digital-clock__date">{date_and_time_utils.getClockDate()}</p>
+            <p className="digital-clock__time">{`${dt_utils.formatTimeToSeconds(time)} ${dt_utils.getAmPm(time)}`}</p>
+            <p className="digital-clock__date">{dt_utils.getClockDate()}</p>
         </div>
      );
 }
