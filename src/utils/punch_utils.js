@@ -1,3 +1,5 @@
+import {default as dt_utils} from './date_and_time';
+
 
 function punchInOut(shiftId, punch) {
     return fetch(`/shifts/${shiftId}/punches`, {
@@ -14,6 +16,18 @@ function punchInOut(shiftId, punch) {
                 throw new Error('Coulnd not make punch');
         })
         .catch(e => null);
+}
+
+function getLastPunch(shift, empId) {
+    return new Promise(async (resolve, reject) => {
+        let lastPunch;
+        if(shift.punches.length) {
+            lastPunch = shift.punches[shift.punches.length -1];
+        }else {
+            lastPunch = await fetch(`api/employees/${empId}/lastpunch`).then(res => res.json());
+        }
+        resolve(lastPunch);
+    })
 }
 
 function getPunchPairs(punches) {
@@ -60,6 +74,20 @@ function getPunchTypes(lastPunch) {
 
 function getPunchButtonColor(type) { return type === 'in' ? 'rgb(48,142,124)': 'rgb(232,85,61)' }
 
+function formatLastPunch(lastPunch) {
+    return lastPunch ? `${lastPunch.type.toUpperCase()}: ${dt_utils.formatTimeToMinutes(new Date(lastPunch.time))} ${dt_utils.getAmPm(new Date(lastPunch.time))}` : null
+}
+
+function displayLastPunchDate(lastPunch) {
+    if(lastPunch) {
+        let punchDate = new Date(lastPunch.time);
+        let today = new Date()
+        punchDate = new Date(punchDate.getFullYear(), punchDate.getMonth(), punchDate.getDate()); // drop the time
+        return punchDate < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    }
+    return false;
+}
+
 function totalHours(punchPairs) {
     let totalHrs = 0;
 
@@ -72,15 +100,18 @@ function totalHours(punchPairs) {
 
 const punch_utils = {
     punchInOut,
+    getLastPunch,
     getPunchPairs,
     getPunchTypes,
     getPunchButtonColor,
+    formatLastPunch,
+    displayLastPunchDate,
     totalHours
 };
 
 export default punch_utils;
 
-export { punchInOut, getPunchPairs, getPunchTypes, getPunchButtonColor, totalHours };
+export { punchInOut, getLastPunch, getPunchPairs, getPunchTypes, getPunchButtonColor, formatLastPunch, displayLastPunchDate, totalHours };
 
 
 function punchTimeDiff(punch1, punch2) {

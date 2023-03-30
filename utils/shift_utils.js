@@ -1,9 +1,30 @@
 
 module.exports = {
-    getWorkPeriod,
-    filterShifts,
     getWeeks
 }
+
+function getWeeks(shifts) {
+
+    let date = new Date();
+    const[start, end] = getWorkPeriod(date);
+
+    shifts = filterShifts(shifts, start, end);
+
+    let week1 = createWeek(date, start);
+    let week2 = createWeek(date, start + 7);
+
+    week1.shifts = shifts.filter(s => new Date(s.date).getDate() <= (start + 7));
+    week2.shifts = shifts.filter(s => new Date(s.date).getDate() > (start + 7));
+    
+    return {
+        week1,
+        week2
+    };
+}
+
+/*
+ ************ Helper functions ***************
+ */
 
 function getWorkPeriod(date) {
     let start = 1
@@ -24,19 +45,6 @@ function filterShifts(shifts, start, end) {
     })
 }
 
-function getWeeks(shifts, start) {
-    let date = new Date();
-    let week1 = createWeek(date, start);
-    let week2 = createWeek(date, start + 7);
-
-    week1.shifts = shifts.filter(s => new Date(s.date).getDate() <= (start + 7));
-    week2.shifts = shifts.filter(s => new Date(s.date).getDate() > (start + 7));
-    
-    return {
-        week1,
-        week2
-    };
-}
 
 function createWeek(date, day) {
     return  {

@@ -7,16 +7,15 @@
     align-items: center;
 
     &__last-punch {
-        margin: 3rem 0;
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
         padding: 1rem 1.5rem;
         border-radius: 10px;
         font-family: 'Roboto Mono', monospace;
         background-color: $tertiary-color;
+        text-align: center;
 
         & h1 {
            font-size: 3rem;
-           text-align: center;
            font-weight: bold;
            padding: .5rem;
         }

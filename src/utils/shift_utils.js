@@ -44,8 +44,7 @@ function createShift(empId, date) {
             employee: empId,
         })
     })
-    .then(res => res.json())
-    .then(result => result);
+    .then(res => res.json());
 }
 
 const shift_util = {

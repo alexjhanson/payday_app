@@ -8,7 +8,9 @@ function create(req, res) {
 
     Shift.findById(req.params.id)
     .then(shift => {
-        shift.punches.push(req.body);
+        let punch = req.body;
+        shift.punches.push(punch);
+        shift.open = punch.type !== 'out';
         return shift.save();
     })
     .then(shift => res.status(200).json(shift))

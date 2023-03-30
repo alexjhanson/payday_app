@@ -25,7 +25,8 @@ function App() {
     shiftsUpdating: false,
     punchError: false,
     requests: null,
-    requestsUpdating: false
+    requestsUpdating: false,
+    lastPunch: null
   });
   
   // initialize state
@@ -44,6 +45,7 @@ function App() {
       tmp.punchError = true;
     }
 
+    tmp.lastPunch = tmp.currentShift.punches.length? tmp.currentShift.punches[tmp.currentShift.punches.length - 1] : null;
     tmp.currentShiftUpdating = false;
 
     setAppState(tmp);
@@ -68,6 +70,7 @@ function App() {
                 handleCurrentShiftUpdate={handleCurrentShiftUpdate} 
                 currentShift={appState.currentShift}
                 punchError={appState.punchError}
+                lastPunch={appState.lastPunch}
             />
             <RequestPanel panelLocation="panel--3" requests={appState.requests}/>
           </div>
