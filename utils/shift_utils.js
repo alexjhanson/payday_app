@@ -27,18 +27,22 @@ function ascending(s1, s2) {
 
 function getWeeks(shifts) {
 
-    let date = new Date();
-    const[start, end] = getWorkPeriod(date);
-
-    shifts = filterShifts(shifts, start, end);
-
-    let week1 = createWeek(date, start);
-    let week2 = createWeek(date, start + 7);
-
-    week1.shifts = shifts.filter(s => new Date(s.date).getDate() <= (start + 7));
-    week2.shifts = shifts.filter(s => new Date(s.date).getDate() > (start + 7));
+    return new Promise(resolve => {
+        let date = new Date();
+        const[start, end] = getWorkPeriod(date);
     
-    return [week1, week2]
+        shifts = filterShifts(shifts, start, end);
+    
+        let week1 = createWeek(date, start);
+        let week2 = createWeek(date, start + 7);
+    
+        week1.shifts = shifts.filter(s => new Date(s.date).getDate() <= (start + 7));
+        week2.shifts = shifts.filter(s => new Date(s.date).getDate() > (start + 7));
+        
+        resolve([week1, week2]);
+    });
+
+
 }
 
 /*

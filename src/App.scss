@@ -69,6 +69,30 @@
   }
 }
 
+.scale-btn {
+  
+  transition: all .2s;
+  transform: translate(0,0) scale(1);
 
+  &:active {
+      box-shadow: none;
+      transform: translate(2px, 2px) scale(1);
+  }
+
+  &:hover {
+      transform: translate(0, 0) scale(1.15);
+  }
+}
+
+.scale-icon {
+  transform: scale(1);
+  transition: all .2s;
+  &:hover {
+      transform: scale(1.1);
+  }
+  &:active{
+      transform: scale(1);
+  }
+}
 
 

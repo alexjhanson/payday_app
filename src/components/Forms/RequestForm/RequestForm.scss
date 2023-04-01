@@ -2,7 +2,6 @@
     display: flex;
     margin: 2rem;
     flex-direction: column;
-    font-family: 'Roboto Mono', monospace;
 
     & > * {
         margin: 1rem;
@@ -16,7 +15,7 @@
     & > h1 {
         background-color: rgb(232,85,61);
         padding: .5rem 2rem;
-        margin-bottom: 3.5rem;
+        margin-bottom: 5rem;
         font-weight: bold;
         font-size: 3rem;
         border-radius: 5px;
@@ -29,7 +28,9 @@
 
     &  textarea[name='notes'] {
         height: 12rem;
-        width: 100%;
+        width: 30rem;
+        font-size: 2rem;
+        padding: 1rem;
         resize: none;
     }
 

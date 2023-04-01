@@ -28,10 +28,10 @@ export default function RequestEdit(props) {
             <input className="request-edit__start" type="date" name="start" value={toISODate(new Date(state.start))} onChange={e => {handleChange(e)}} />
             <input className="request-edit__end" type="date" name="end" value={toISODate(new Date(state.end))} onChange={e => {handleChange(e)}} />
             <input className="request-edit__notes" type="text" name="notes" value={state.notes} onChange={e => {handleChange(e)}} />
-            <svg className="save-icon" onClick={() => props.handleEdit({...state})}>
+            <svg className="save-icon scale-icon" onClick={() => props.handleEdit({...state})}>
                 <use xlinkHref="sprite.svg#icon-checkmark2" />
             </svg>
-            <svg className="cxl-icon" onClick={() => props.toggleEdit(null)}>
+            <svg className="cxl-icon scale-icon" onClick={() => props.toggleEdit(null)}>
                 <use xlinkHref="sprite.svg#icon-undo" />
             </svg>
         </div>

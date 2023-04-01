@@ -7,6 +7,7 @@
 
     &__header {
         padding: 1rem;
+        margin-bottom: 1rem;
         padding-left: 2rem;
         border-radius: 5px;
         background-color: $secondary-color;
@@ -19,7 +20,7 @@
         align-self: end;
         font-size: 4rem;
         font-weight: bold;
-        margin: 1rem;
+        margin: 0 1rem;
         padding: .25rem 1.5rem;
         border: none;
         color: white;
@@ -27,11 +28,6 @@
         box-shadow: 2px 5px 5px rgba(0,0,0, .8);
         border-radius: 50%;
         cursor: pointer;
-
-        &:active {
-            box-shadow: none;
-            transform: translate(2px, 2px);
-        }
     }
 
     &__request-container {

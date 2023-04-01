@@ -1,6 +1,5 @@
 
 const request_utils = {
-    init,
     getRequests,
     createRequest,
     updateRequest,
@@ -9,12 +8,8 @@ const request_utils = {
 
 export default request_utils;
 
-export { init, getRequests, createRequest, updateRequest, deleteRequest}
+export { getRequests, createRequest, updateRequest, deleteRequest}
 
-async function init(state, setState) {
-    let reqs = await getRequests(state.empId);
-    setState({...state, reqs});
-}
 
 function getRequests(empId) {
     return fetch(`/api/employees/${empId}/requests`)

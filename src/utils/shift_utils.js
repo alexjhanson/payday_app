@@ -3,12 +3,13 @@
 
 const shift_util = {
     createShift,
-    getCurrentShift
+    getCurrentShift,
+    getCurrentWeeks
  };
 
 export default shift_util;
  
-export { createShift, getCurrentShift };
+export { createShift, getCurrentShift, getCurrentWeeks };
 
 
 function createShift(empId, date, open) {
@@ -32,6 +33,7 @@ function getCurrentShift(empId) {
             .then(res => res.json());
 }
 
-
-
-// function getLatestWeek(date, weeks) { return date.getDate() < new Date(weeks[1].date).getDate() ? weeks[0] : weeks[1]; }
+function getCurrentWeeks(empId) {
+    return fetch(`api/employees/${empId}/currentweeks`)
+            .then(res => res.json());
+}

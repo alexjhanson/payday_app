@@ -25,7 +25,7 @@ export default function App() {
   if(employee) {
     return (
         <div className="App">
-          {/* <ShiftPanel panelLocation="panel--1" empId={employee._id} /> */}
+          <ShiftPanel panelLocation="panel--1" empId={employee._id} />
           <ClockPanel panelLocation="panel--2" empId={employee._id}/> 
           <RequestPanel panelLocation="panel--3" empId={employee._id}/>
         </div>

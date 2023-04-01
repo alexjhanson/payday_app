@@ -7,6 +7,7 @@ import Loading from '../../components/Loading/Loading';
 
 import { useState, useEffect } from 'react';
 import {default as rq_utils} from '../../utils/request_utils';
+import Form from '../../components/Forms/Form/Form';
 
 
 export default function RequestPanel(props) {
@@ -20,16 +21,20 @@ export default function RequestPanel(props) {
     });
 
     useEffect(() => {
-        rq_utils.init({...state}, setState);
+        init();
     }, [])
+
+    async function init() {
+        let reqs = await rq_utils.getRequests(state.empId);
+        setState({...state, reqs});
+    }
 
     function toggleEdit(req) {
         setState({...state, req});
     }
 
     function toggleForm() {
-        // let transitions and animations display.
-        setTimeout(() => setState({...state, ...{formActive: !state.formActive}}), 250);
+        setState({...state, ...{formActive: !state.formActive}})
     }
 
     async function updateState(req) {
@@ -48,14 +53,12 @@ export default function RequestPanel(props) {
 
     async function handleCreate(r) {
 
-        setTimeout(async () => {
+        setState({...state, ...{updating: true, formActive: false}});
+        
+        const req = await rq_utils.createRequest(r);
 
-            setState({...state, ...{updating: true, formActive: false}});
-            
-            const req = await rq_utils.createRequest(r);
-
-            updateState(req);
-        },250)
+        updateState(req);
+        
     }
 
     async function handleEdit(r) {
@@ -78,13 +81,13 @@ export default function RequestPanel(props) {
 
     return ( 
         <>
-            {state.formActive ? <RequestForm handleCreate={handleCreate} toggleForm={toggleForm} employee={state.empId}/> : null}
+            {state.formActive ? <Form toggleForm={toggleForm} render={<RequestForm handleCreate={handleCreate} employee={state.empId}/>}/> : null}
             <div className={`panel request-panel ${props.panelLocation}`}>
                 <h1 className="request-panel__header">Requests</h1>
             { 
                 state.reqs && !state.updating ?
                 <>
-                    <button className="request-panel__add-btn" onClick={() => toggleForm()}>+</button>
+                    <button className="request-panel__add-btn scale-btn" onClick={() => toggleForm()}>+</button>
                     <div className="request-panel__request-container">
                         {
                             state.reqs.length? 

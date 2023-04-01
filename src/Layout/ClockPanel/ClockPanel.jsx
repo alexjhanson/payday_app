@@ -8,6 +8,7 @@ import { PureComponent } from 'react';
 import {default as sh_util} from '../../utils/shift_utils';
 import {default as p_util} from '../../utils/punch_utils';
 import {default as dt_util} from '../../utils/date_and_time';
+import React from 'react';
 
 
 export default class ClockPanel extends PureComponent{
@@ -53,18 +54,21 @@ export default class ClockPanel extends PureComponent{
             currentShift = await p_util.makePunch(this.state.currentShift._id, punch);
             if(!currentShift.open && !dt_util.areDatesEqual(new Date(currentShift.date), dt_util.getDateAtMidnight())) {
                 currentShift = await sh_util.createShift(this.props.empId, dt_util.getDateAtMidnight(), true);
+                lastPunch = await p_util.getLastPunch(this.props.empId);
+            }else {
+                lastPunch = currentShift.punches[currentShift.punches.length -1];
             }
         } else {
             currentShift = await sh_util.createShift(this.props.empId, dt_util.getDateAtMidnight(), true);
             currentShift = await p_util.makePunch(currentShift._id, punch);
+            lastPunch = currentShift.punches[currentShift.punches.length -1];
         }
 
-        lastPunch = currentShift.punches[currentShift.punches.length -1];
         updating = false;
-
+        window.dispatchEvent(new CustomEvent('clock-punch', {update: true}))
+        
         this.setState({currentShift, lastPunch, updating});
     }
-
 
     render() {
         return (

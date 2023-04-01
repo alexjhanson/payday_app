@@ -12,6 +12,16 @@
     &__date {
         cursor: pointer;
         font-size: 1.6rem;
+        transform: scale(1);
+        transition: all .2s;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+
+        &:active {
+            transform: scale(1);
+        }
     }
 
     &__total-hours {

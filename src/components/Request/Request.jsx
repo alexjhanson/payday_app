@@ -12,10 +12,10 @@ const Request = (props) => {
                 <div className="request-view__start">{dt_util.standardDateFormat(new Date(props.req.start))}</div>
                 <div className="request-view__end">{dt_util.standardDateFormat(new Date(props.req.end))}</div>
                 <div className="request-view__notes">{props.req.notes}</div>
-                <svg className="edit-icon" onClick={() => props.toggleEdit(props.req)}>
+                <svg className="edit-icon scale-icon" onClick={() => props.toggleEdit(props.req)}>
                     <use xlinkHref="sprite.svg#icon-pencil" />
                 </svg>
-                <svg className="trash-icon" onClick={() => props.handleDelete(props.req._id)}>
+                <svg className="trash-icon scale-icon" onClick={() => props.handleDelete(props.req._id)}>
                     <use xlinkHref="sprite.svg#icon-bin" />
                 </svg>
             </div>

@@ -1,6 +1,7 @@
 import './Shift.scss';
 
-import ShiftDetail from '../ShiftDetail/ShiftDetail';
+import ShiftEditForm from '../Forms/ShiftEditForm/ShiftEditForm';
+import Form from '../Forms/Form/Form';
 
 import { standardDateFormat } from '../../utils/date_and_time';
 import { totalHours, getPunchRows } from '../../utils/punch_utils';
@@ -10,33 +11,19 @@ const Shift = (props) => {
 
     const [displayDetail, setDisplayDetail] = useState(false);
     const punchRows = getPunchRows(props.punches)
-    const date = standardDateFormat(new Date(props.date));
 
-    function handleDisplayDetail(show) {
-        setDisplayDetail(show);
+    function toggleForm() {
+        setDisplayDetail(!displayDetail);
     }
 
     return (
         <div className="shift">
             <input type="checkbox" className="shift__approve-box" />
-            <div 
-                className="shift__date"
-                onClick={() => { 
-                    handleDisplayDetail(true)
-                    props.handleDisplayMask(true); 
-                }}
-            >
-                {date}  
+            <div className="shift__date" onClick={toggleForm}>
+                {standardDateFormat(new Date(props.date))}  
             </div>
             <div className="shift__total-hours">{totalHours(punchRows).toFixed(2) + " hrs"}</div>
-            { displayDetail ?  
-                <ShiftDetail 
-                    punchRows={punchRows} 
-                    handleDisplayDetail={handleDisplayDetail}
-                    handleDisplayMask={props.handleDisplayMask} 
-                    date={date}
-                /> 
-                : null }
+            { displayDetail ?  <Form toggleForm={toggleForm} render={<ShiftEditForm punchRows={punchRows} date={props.date}/>}/> : null }
         </div>
     );
 }

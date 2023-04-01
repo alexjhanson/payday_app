@@ -10,7 +10,12 @@
 
     &__notes {
         margin-right: 3rem;
+        padding: 0;
         width: 50%;
+        height: 3rem;
+        border: 1px solid black;
+        border-radius: 3px;
+        overflow: scroll;
     }
 
 }
