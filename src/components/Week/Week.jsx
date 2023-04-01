@@ -9,10 +9,18 @@ const Week = (props) => {
         <div className="week">
             <h1 className="week__header">{shiftWeekDateFormat(new Date(props.date))}</h1>
             <div className="week__shift-container">
-                { props.shifts.map( (s, indx) => <Shift date={s.date} punches={s.punches} key={`shift-${indx}`}/> ) }
+                { props.shifts.map( (s, indx) => {
+                    return <Shift 
+                                date={s.date} 
+                                punches={s.punches} 
+                                key={`shift-${indx}`}
+                                handleDisplayMask={props.handleDisplayMask}
+                            /> ;
+                    })}
             </div>
         </div>
     );
 }
 
 export default Week;
+

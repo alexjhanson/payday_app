@@ -1,38 +1,17 @@
 
-function initializeShift(shifts, empId) {
-    return new Promise(async (resolve) => {
+// import {default as dt_utils} from "./date_and_time";
 
-        let today = new Date()
-        let week = today.getDate() < new Date(shifts.week2.date).getDate() ? shifts.week1 : shifts.week2;
+const shift_util = {
+    createShift,
+    getCurrentShift
+ };
 
-        let shift = week.shifts.find(s => {
-            if(!s.open) {
-                let date = new Date(s.date);
-                date.setHours=(0,0,0);
-                return date.getTime() === today.getTime();
-            }
-            return true;
-        });
+export default shift_util;
+ 
+export { createShift, getCurrentShift };
 
-        if(!shift) {
-            shift = await createShift(empId, today);
-            week.shifts.push(shift);
-        }
 
-        resolve(shift);
-    });
-}
-
-function syncShifts(shifts, shift) {
-    let week = new Date(shift.date).getDate() < new Date(shifts.week2.date).getDate()? shifts.week1 : shifts.week2;
-    let idx = week.shifts.findIndex(s => s._id === shift._id);
-
-    if(idx > 0) {
-        week.shifts.splice(idx, 0, shift);
-    }
-}
-
-function createShift(empId, date) {
+function createShift(empId, date, open) {
     return fetch(`/shifts`, {
         method: 'POST',
         headers: {
@@ -40,18 +19,19 @@ function createShift(empId, date) {
         },
         body: JSON.stringify({
             date: date.toISOString(),
-            open: true,
+            open,
             employee: empId,
         })
     })
     .then(res => res.json());
 }
 
-const shift_util = {
-    initializeShift,
-    syncShifts
- };
 
- export default shift_util;
- 
-export { initializeShift, syncShifts };
+function getCurrentShift(empId) {
+    return fetch(`api/employees/${empId}/currentshift`)
+            .then(res => res.json());
+}
+
+
+
+// function getLatestWeek(date, weeks) { return date.getDate() < new Date(weeks[1].date).getDate() ? weeks[0] : weeks[1]; }

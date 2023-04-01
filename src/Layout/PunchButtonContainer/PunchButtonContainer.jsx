@@ -16,7 +16,7 @@ export default function PunchButtonContainer (props) {
                 {visibility: lastPunch ? 'visible' : 'hidden', height: lastPunch ? null : '12rem', width: lastPunch ? null : '30rem'}
             }>
                 <h1>Last Punch</h1>
-                { p_utils.displayLastPunchDate(lastPunch) ?  <p>{dt_utils.shiftDayDateFormat(new Date(lastPunch.time))}</p> : null}
+                { p_utils.displayLastPunchDate(lastPunch) ?  <p>{dt_utils.standardDateFormat(new Date(lastPunch.time))}</p> : null}
                 <p>
                     {p_utils.formatLastPunch(lastPunch)} 
                 </p>
@@ -26,18 +26,19 @@ export default function PunchButtonContainer (props) {
                 { punchType ? 
                         <PunchButton punchType={punchType} 
                                      bgColor={p_utils.getPunchButtonColor(punchType)} 
-                                     handleCurrentShiftUpdate = {props.handleCurrentShiftUpdate}
+                                     handlePunch = {props.handlePunch}
                         /> 
                         : null}
                 { lunchType ? 
                         <PunchButton punchType={lunchType} 
                                      bgColor={p_utils.getPunchButtonColor(lunchType)} 
-                                     handleCurrentShiftUpdate = {props.handleCurrentShiftUpdate}
+                                     handlePunch = {props.handlePunch}
                         /> 
                         : null }
             </div>
         </div>
      );
 }
+
 
 

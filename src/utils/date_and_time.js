@@ -1,3 +1,33 @@
+const date_and_time_utils = {
+    formatTimeToMinutes,
+    formatTimeToSeconds,
+    shiftWeekDateFormat,
+    standardDateFormat,
+    toISODate,
+    getClockDate,
+    areDatesEqual,
+    dateSuffix,
+    getAmPm,
+    getDateAtMidnight
+};
+
+
+export default date_and_time_utils;
+
+export { 
+        formatTimeToMinutes, 
+        formatTimeToSeconds, 
+        shiftWeekDateFormat,
+        standardDateFormat, 
+        toISODate,
+        getClockDate, 
+        areDatesEqual,
+        dateSuffix,
+        getAmPm,
+        getDateAtMidnight,
+    };
+
+
 
 const WEEK_DAY_SHORT = ['SUN','MON', 'TUE', 'WED', 'THUR', 'FRI', 'SAT'];
 // const WEEK_DAY_LONG = ['SUN','MON', 'TUE', 'WED', 'THUR', 'FRI', 'SAT'];
@@ -19,7 +49,9 @@ function getClockDate() {
 
 function shiftWeekDateFormat(date) { return `${MONTH_SHORT[date.getMonth()]} ${date.getDate()}${dateSuffix(date).toUpperCase()}`; }
 
-function shiftDayDateFormat(date) { return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear() % 100}`; }
+function standardDateFormat(date) { return `${date.getMonth() + 1}/${date.getDate().toString().padStart(2, '0')}/${date.getFullYear() % 100}`; }
+
+function toISODate(date) { return `${date.getFullYear()}-${(date.getMonth()+1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`}
 
 function areDatesEqual(date1, date2) { return date1.getFullYear() === date2.getFullYear() && date1.getMonth() === date2.getMonth() && date1.getDate() === date2.getDate(); }
 
@@ -35,57 +67,37 @@ function normalizeTime(time) {
 
 }
 
-function getAmPm(time) {
-
-    let hours = time.getHours();
-    return hours >= 12 ? 'PM' : 'AM';
-}
+function getAmPm(time) {  return time.getHours() >= 12 ? 'PM' : 'AM'; }
 
 function dateSuffix(date) {
-
-    let suffix;
-
     switch(date.getDate()) {
         case 1:
         case 21:
         case 31:
-            suffix = 'st';
-            break;
+            return 'st';
         case 2:
         case 22:
-            suffix = 'nd';
-            break;
+            return 'nd';
         case 3:
         case 23:
-            suffix = 'rd';
-            break;
+            return 'rd';
         default:
-            suffix = 'th';
+            return 'th';
     }
-
-    return suffix;
 }
 
-const date_and_time_utils = {
-    formatTimeToMinutes,
-    formatTimeToSeconds,
-    shiftWeekDateFormat,
-    shiftDayDateFormat,
-    getClockDate,
-    areDatesEqual,
-    dateSuffix,
-    getAmPm,
-};
+function getDateAtMidnight(date) {
 
-export default date_and_time_utils;
+    if(!date) {
+        date = new Date();
+    }
 
-export { 
-        formatTimeToMinutes, 
-        formatTimeToSeconds, 
-        shiftWeekDateFormat,
-        shiftDayDateFormat, 
-        getClockDate, 
-        areDatesEqual,
-        dateSuffix,
-        getAmPm,
-    };
+    if(typeof date === 'string') {
+        let d = new Date(date)
+        d.setHours(0,0,0,0);
+        return d;
+    }
+
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0,0,0,0);
+}
+

@@ -8,24 +8,24 @@ const requestSchema = new Schema({
         enum: ['PTO', 'SICK', 'PAT', 'MAT', 'VOTE', 'COMP', 'MIL', 'JURY', 'PRSN', 'VAC'],
         required: true,
     },
-    startDate: {
+    start: {
         type: String,
         match: settings.date_and_time_format,
         required: true,
     },
-    endDate: {
+    end: {
         type: String,
         match: settings.date_and_time_format,
         required: true,
     },
     notes: {
         type: String,
-        maxlength: 100,
+        maxlength: 150,
     },
     status: {
         type: String,
         enum: ['APRV', 'DEN', 'PEN'],
-        required: true,
+        default: 'PEN'
     },
     employee: {
         type: Schema.Types.ObjectId,

@@ -14,6 +14,7 @@ const apiRouter = require('./routes/api/api');
 const employeesRouter = require('./routes/employees');
 const shiftsRouter = require('./routes/shifts');
 const punchesRouter = require('./routes/punches');
+const requestsRouter = require('./routes/requests');
 
 // create server
 const app = express();
@@ -29,6 +30,7 @@ app.use('/api', apiRouter);
 app.use('/employees', employeesRouter);
 app.use('/shifts', shiftsRouter);
 app.use('/', punchesRouter);
+app.use('/requests', requestsRouter);
 
 // catch all route, REACT client-side routing
 app.get('/*', (req, res) => {
@@ -40,3 +42,5 @@ const port = process.env.port || 3001;
 app.listen(port, () => {
     console.log(`Express app running on port ${port}`);
 })
+
+

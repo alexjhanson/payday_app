@@ -2,12 +2,20 @@
 .shift {
 
     display: flex;
+    align-items: center;
+    margin: 1rem 0;
 
     > * {
-        margin: 1rem;
+        margin: 0 1rem;
     }
 
     &__date {
         cursor: pointer;
+        font-size: 1.6rem;
+    }
+
+    &__total-hours {
+        font-size: 1.6rem;
+        font-weight: bold;
     }
 }

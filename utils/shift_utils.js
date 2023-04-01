@@ -1,6 +1,28 @@
+const dt_utils = require('./date_and_time_utils.js');
 
 module.exports = {
+    getCurrentShift,
+    ascending,
     getWeeks
+}
+
+function getCurrentShift(shifts) {
+    return new Promise(resolve => {
+        if(shifts.length) {
+            shifts.sort(ascending);
+            let shift = shifts[shifts.length - 1];
+            if(shift.open || dt_utils.getDateAtMidnight(shift.date).getTime() === dt_utils.getDateAtMidnight().getTime()){
+                resolve(shift);
+            }
+        }
+        resolve(null);
+    })
+}
+
+function ascending(s1, s2) {
+    s1 = dt_utils.getDateAtMidnight(s1.date);
+    s2 = dt_utils.getDateAtMidnight(s2.date);
+    return s1.getTime() - s2.getTime();
 }
 
 function getWeeks(shifts) {
@@ -16,15 +38,13 @@ function getWeeks(shifts) {
     week1.shifts = shifts.filter(s => new Date(s.date).getDate() <= (start + 7));
     week2.shifts = shifts.filter(s => new Date(s.date).getDate() > (start + 7));
     
-    return {
-        week1,
-        week2
-    };
+    return [week1, week2]
 }
 
 /*
  ************ Helper functions ***************
  */
+
 
 function getWorkPeriod(date) {
     let start = 1

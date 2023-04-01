@@ -1,0 +1,43 @@
+
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    background-color: white;
+    border: 2px solid red;
+    border-radius: 5px;
+    box-shadow: 0 5px 5px rgba(0,0,0, .8);
+  
+    &__cxl-btn {
+      align-self: end;
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding: .25rem .5rem;
+      background-color: red;
+      color: white;
+      outline: none;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 5px 5px rgba(0,0,0, .8);
+      transition: all .2s;
+      cursor: pointer;
+  
+      &:active {
+        box-shadow: none;
+        transform: translate(2px, 2px);
+      }
+    }
+}
+
+.mask {
+  position: absolute;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0,0,0,.6);
+  z-index: 4;
+}

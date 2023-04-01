@@ -9,7 +9,7 @@ const DigitalClock = (props) => {
 
     return ( 
         <div className="digital-clock">
-            <p className="digital-clock__time">{`${dt_utils.formatTimeToSeconds(time)} ${dt_utils.getAmPm(time)}`}</p>
+            <p className="digital-clock__time">{`${dt_utils.formatTimeToMinutes(time)} ${dt_utils.getAmPm(time)}`}</p>
             <p className="digital-clock__date">{dt_utils.getClockDate()}</p>
         </div>
      );

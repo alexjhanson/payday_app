@@ -1,0 +1,62 @@
+.request-form {
+    display: flex;
+    margin: 2rem;
+    flex-direction: column;
+    font-family: 'Roboto Mono', monospace;
+
+    & > * {
+        margin: 1rem;
+        font-size: 2rem;
+    }
+
+    & label {
+        display: flex;
+    }
+
+    & > h1 {
+        background-color: rgb(232,85,61);
+        padding: .5rem 2rem;
+        margin-bottom: 3.5rem;
+        font-weight: bold;
+        font-size: 3rem;
+        border-radius: 5px;
+        color: white;
+    }
+
+    &  select {
+        width: 6rem; 
+    }
+
+    &  textarea[name='notes'] {
+        height: 12rem;
+        width: 100%;
+        resize: none;
+    }
+
+    &  span {
+        display: inline-block;
+        width: 6rem;
+        margin-right: 1rem;
+    }
+
+    & > input[type='submit'] {
+        align-self: end;
+        font-size: 3rem;
+        font-weight: bold;
+        margin-top: 2.5rem;
+        padding: .25rem 1.5rem;
+        border: none;
+        color: white;
+        background-color: rgb(68,193,101);
+        box-shadow: 2px 5px 5px rgba(0,0,0, .8);
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:active {
+            box-shadow: none;
+            transform: translate(2px, 2px);
+        }
+    }
+
+
+}

@@ -27,7 +27,7 @@ const shiftSchema = new Schema({
     },
     open: {
         type: Boolean,
-        required: true
+        default: false
     },
     punches: [punchSchema],
     employee: {

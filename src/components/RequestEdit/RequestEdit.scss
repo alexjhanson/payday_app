@@ -1,0 +1,29 @@
+.request-edit {
+    display: flex;
+    align-items: center;
+    padding: 2px; 
+    box-shadow: 0 3px 3px rgba(0,0,0,.4);
+
+    &__type, &__start, &__end, &__notes  {
+        font-size: 1.6rem;
+        height: 4rem;
+        padding: 5px;
+        margin: 3px;
+    } 
+
+    &__start, &__end {
+        width: 30rem;
+    }
+
+    &__notes {
+        margin-right: 1rem;
+        width: 50%;
+    }
+
+}
+
+.save-icon, .cxl-icon{
+    width: 4rem;
+    height: 4rem;
+    margin: 1rem;
+}

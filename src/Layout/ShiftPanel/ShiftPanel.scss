@@ -3,10 +3,12 @@
 
 .shift-panel {
 
+    align-items: center;
+
     &__header {
         width: 90%;
         padding: 1rem 0;
-        margin: 4rem auto;
+        margin: 3rem 0;
         text-align: center;
         background-color: $secondary-color;
         color: #EEE;

@@ -13,6 +13,7 @@
  }
 
  body {
+  position: relative;
   background-color: $primary-color;
   box-sizing: border-box;
   height: 100vh;
@@ -46,11 +47,13 @@
 }
 
 .panel {
+  display: flex;
+  flex-direction: column;
   background-color: white;
   box-shadow: 5px 5px 10px rgba(0,0,0, .6);
-  border-radius: 20px;
+  border-radius: 5px;
   overflow: scroll;
-
+  border: 2px solid red;
   font-family: 'Roboto Mono', monospace;
 
   &--1 {
@@ -65,7 +68,6 @@
     grid-area: panel3;
   }
 }
-
 
 
 
