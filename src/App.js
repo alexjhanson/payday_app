@@ -32,7 +32,7 @@ export default function App() {
         </div>
     );
   } else {
-    return <Loading color='#fff'/>
+    return <Loading color='rgb(232,85,61)'/>
   }
 };
 
