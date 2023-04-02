@@ -87,8 +87,9 @@
 .scale-icon {
   transform: scale(1);
   transition: all .2s;
+  cursor: pointer;
   &:hover {
-      transform: scale(1.1);
+      transform: scale(1.15);
   }
   &:active{
       transform: scale(1);

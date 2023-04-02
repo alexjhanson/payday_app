@@ -18,6 +18,7 @@ export default function App() {
   const [employee, setEmployee] = useState(null);
   
   // initialize state
+  // eslint-disable-next-line
   useEffect(()=> {
     initApp(setEmployee);
   }, []);

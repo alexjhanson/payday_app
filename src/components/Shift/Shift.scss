@@ -17,10 +17,13 @@
 
         &:hover {
             transform: scale(1.1);
+            color:rgb(232,85,61);
+            font-weight: bold;
         }
 
         &:active {
             transform: scale(1);
+            color: rgb(232,85,61);
         }
     }
 

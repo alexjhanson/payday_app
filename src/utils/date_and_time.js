@@ -36,9 +36,21 @@ const MONTH_SHORT = ['JAN','FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP
 // const MONTH_LONG = ['JANUARY','FEBRUARY', 'MARCH', 'ARPIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
 
 
-function formatTimeToSeconds(time) { return `${normalizeTime(time).toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}:${time.getSeconds().toString().padStart(2, '0')}`; }
+function formatTimeToSeconds(time) { 
+    
+    if(typeof time == 'string')
+        time = new Date(time);
+    
+    return `${normalizeTime(time).toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}:${time.getSeconds().toString().padStart(2, '0')}`; 
+}
 
-function formatTimeToMinutes(time) { return `${normalizeTime(time).toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`; }
+function formatTimeToMinutes(time) { 
+
+    if(typeof time == 'string')
+        time = new Date(time);
+    
+    return `${normalizeTime(time).toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
+ }
 
 function getClockDate() {
 
@@ -49,7 +61,13 @@ function getClockDate() {
 
 function shiftWeekDateFormat(date) { return `${MONTH_SHORT[date.getMonth()]} ${date.getDate()}${dateSuffix(date).toUpperCase()}`; }
 
-function standardDateFormat(date) { return `${date.getMonth() + 1}/${date.getDate().toString().padStart(2, '0')}/${date.getFullYear() % 100}`; }
+function standardDateFormat(date) {
+    
+    if(typeof date == 'string')
+        date = new Date(date);
+    
+    return `${date.getMonth() + 1}/${date.getDate().toString().padStart(2, '0')}/${date.getFullYear() % 100}`;
+ }
 
 function toISODate(date) { return `${date.getFullYear()}-${(date.getMonth()+1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`}
 

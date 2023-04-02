@@ -9,6 +9,7 @@ const ShiftPanel = (props) => {
 
     const[weeks, setWeeks] = useState([])
 
+    // eslint-disable-next-line 
     useEffect(() => {
         init();
         window.addEventListener('clock-punch', () => {
