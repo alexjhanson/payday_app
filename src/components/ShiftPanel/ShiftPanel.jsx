@@ -1,6 +1,6 @@
 
 import './ShiftPanel.scss';
-import Week from "../../components/Week/Week";
+import Week from "../Week/Week";
 import { useEffect, useState } from 'react';
 import {default as sh_util} from '../../utils/shift_utils';
 

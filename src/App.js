@@ -3,9 +3,9 @@ import './App.scss';
 import './App.css';
 
 // UI components
-import ShiftPanel from './layout/ShiftPanel/ShiftPanel';
-import ClockPanel from  './layout/ClockPanel/ClockPanel';
-import RequestPanel from './layout/RequestPanel/RequestPanel';
+import ShiftPanel from './components/ShiftPanel/ShiftPanel';
+import ClockPanel from  './components/ClockPanel/ClockPanel';
+import RequestPanel from './components/RequestPanel/RequestPanel';
 import Loading from './components/Loading/Loading'
 
 // state (Hooks) & helper functions

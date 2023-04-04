@@ -2,7 +2,7 @@ import './PunchButtonContainer.scss';
 import { default as p_utils } from '../../utils/punch_utils';
 import { default as dt_utils } from '../../utils/date_and_time';
 
-import PunchButton from '../../components/PunchButton/PunchButton';
+import PunchButton from '../PunchButton/PunchButton';
 
 export default function PunchButtonContainer (props) {
 
