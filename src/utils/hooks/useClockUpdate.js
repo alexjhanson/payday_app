@@ -15,7 +15,7 @@ export default function useClockUpdate() {
             clearInterval(id);
         };
 
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return time;
 

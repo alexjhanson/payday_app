@@ -20,10 +20,9 @@ export default function RequestPanel(props) {
         formActive: false,
     });
 
-    // eslint-disable-next-line 
     useEffect(() => {
         init();
-    }, [])
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     async function init() {
         let reqs = await rq_utils.getRequests(state.empId);

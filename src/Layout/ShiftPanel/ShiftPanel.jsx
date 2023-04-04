@@ -9,13 +9,12 @@ const ShiftPanel = (props) => {
 
     const[weeks, setWeeks] = useState([])
 
-    // eslint-disable-next-line 
     useEffect(() => {
         init();
         window.addEventListener('clock-punch', () => {
             init()
          });
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     async function init() {
         let weeks = await sh_util.getCurrentWeeks(props.empId);
